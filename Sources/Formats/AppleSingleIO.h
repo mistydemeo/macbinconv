@@ -9,7 +9,7 @@ using namespace std;
 #include "Core/MacFileInput.h"
 
 namespace AppleSingle {
-class Input : public MacFileInput	// Services For Macitnosh
+class Input : public MacFileInput	// AppleSingle file input
 {
 public:
 		Input (const std::string &path);
@@ -41,11 +41,10 @@ private:
 };
 
 extern void Write (MacFileInput& theInput, std::ostream &output);
-
 }
 
 namespace AppleDouble {
-class Input : public MacFileInput	// Services For Macitnosh
+class Input : public MacFileInput	// AppleDouble file input
 {
 public:
 		Input (const std::string &pathforrf, const std::string &pathfordf);
@@ -79,7 +78,6 @@ private:
 };
 
 extern void Write (MacFileInput& theInput, std::ostream &doutput, std::ostream &routput);
-
 }
 
 
