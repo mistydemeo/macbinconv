@@ -252,7 +252,7 @@ static void process (MacFileInput *input, int argc,const char **argv, int &proce
 }
 
 }
-void RegisterSFM() 
+void RegisterServicesForMacIO() 
 {
   CL::RegisterMacFileInput ("sfm","-sfm <filename> : where filename is a Services for Macintosh NTFS file",create);
   CL::RegisterMacFileOutput ("sfm","-sfm <filename> : writes to a file used by Serices for Macintosh should be on an NTFS volume",process);
