@@ -17,6 +17,7 @@ virtual ~SFMFileInput ();
 virtual bool getInfo (	FInfo&		finderInfo,
 						FXInfo&		extendedInfo ) ;
 
+virtual std::string getFileName ();
 virtual bool getComment ( std::string&	thecomment );
 	 
 private:

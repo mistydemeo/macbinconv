@@ -3,6 +3,7 @@
 #include "Core/CommandLine.h"
 #include "Core/DefaultFInfo.h"
 #include "Core/WriteFork.h"
+#include "Core/FileUtils.h"
 
 
 #include <Windows.h>
@@ -39,10 +40,15 @@ public:
 		else
 			return true;
 	}
+
 private:
 	HANDLE		mFile;
 };
 
+std::string SFMFileInput::getFileName ()
+{
+	return FileUtils::GetFileNameFromPath (mPath);
+}
 SFMFileInput::SFMFileInput (const std::string &path) : mPath (path)
 {
 
