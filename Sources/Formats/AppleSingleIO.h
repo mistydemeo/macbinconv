@@ -19,7 +19,7 @@ virtual ~ASFileInput ();
 
 virtual bool getInfo (	FInfo&		finderInfo,
 						FXInfo&		extendedInfo ) ;
-
+virtual string getFileName ();
 virtual bool getComment ( std::string&	thecomment );
 	 
 private:
@@ -31,6 +31,7 @@ private:
 
 	bool			mHasComment; 
 	std::string		mComment;
+	std::string		mFileName;
 
 	UInt32			mFInfoSize;
 	UInt32			mFInfoOffset;

@@ -44,6 +44,10 @@ void printFileInfo (MacFileInput &theInput, bool checkSum = true)
 {
 	FInfo		finderInfo;
 	FXInfo		extendedInfo;
+	// Print file name
+	printf ("FileName = <%s",theInput.getFileName().c_str());
+	printf (">\n");
+	// Print file info
 	if (!theInput.getInfo(finderInfo,extendedInfo))
 		printf ("No Finder Info!\n");
 	else

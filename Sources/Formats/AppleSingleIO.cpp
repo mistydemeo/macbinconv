@@ -14,6 +14,8 @@
 #include "Core/WriteFork.h"
 #include "Core/DefaultFInfo.h"
 
+#include "FileUtils.h"
+
 
 class SubIStream : public MacForkInputStream {
 public:
@@ -108,6 +110,9 @@ ASFileInput::ASFileInput (const std::string	&path)
 			break;
 		}
 	}
+	
+	// Determine name:
+	mFileName = FileUtils::GetFileNameFromPath(path);
 }
 
 ASFileInput::~ASFileInput()
@@ -150,6 +155,12 @@ bool ASFileInput::getInfo (	FInfo&		finderInfo,
 		mStream.read (reinterpret_cast<char*>(&extendedInfo), sizeof (extendedInfo));
 
 	return true;
+}
+
+std::string ASFileInput::getFileName()
+{
+	// ToDo if this info present in AS return that value!!!
+	return mFileName;
 }
 
 bool ASFileInput::getComment ( std::string&	thecomment )

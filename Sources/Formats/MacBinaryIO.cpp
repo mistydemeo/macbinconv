@@ -217,8 +217,7 @@ MacBinFileInput::MacBinFileInput (const std::string	&path)
 	if (!mStream.good())
 		throw CL::BasicException ("Cannot read the header\n");
 
-
-
+	mFileName = std::string((char*)&macBinHeader[kFilenameLengthOffset+1],MBFilenameLength(macBinHeader));
 	MacHeaderVersion	theVersion;
 	if (!IsValidMacBinary(macBinHeader,&theVersion))
 		throw CL::BasicException ("Not a valid mac binary header!\n");
@@ -298,13 +297,13 @@ void EncodeMacBinIII (MacFileInput &theInput, std::ostream &output)
 	int i;
 	char macBinHeader [128] = {0};
 	char zeroPad [128] = {0};
-	const char* fileName = "Untitled";
+	const std::string fileName = theInput.getFileName();
 
 	macBinHeader[0] = 0; // old version number
-	if ((strlen (fileName) >= 31) || (strlen(fileName) == 0))
+	if ((fileName.size() > 31) || fileName.empty())
 		throw CL::BasicException ("The fileName is too long\n");
-	macBinHeader[1] = strlen (fileName);
-	strcpy (&macBinHeader[2],fileName);
+	macBinHeader[1] = fileName.size();
+	strcpy (&macBinHeader[2],fileName.c_str());
 
 	FInfo finderInfo = {0} ;
 	FXInfo extendedFinderInfo = {0};

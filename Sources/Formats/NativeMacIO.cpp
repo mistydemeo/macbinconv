@@ -1,11 +1,14 @@
 #include "Formats/NativeMacIO.h"
 
 #include "Core/CommandLine.h"
+#include "Core/FileUtils.h"
 
 #include "DefaultFInfo.h"
 
 #include <Files.h>
 #include <Aliases.h>
+
+
 
 NativeMacFileInput::NativeMacFileInput (const std::string &path)
 {
@@ -14,14 +17,22 @@ NativeMacFileInput::NativeMacFileInput (const std::string &path)
 	Str255		nullString;
 	OSErr		result;
 	
+	mFileName = FileUtils::GetFileNameFromPath(path);
+
 	nullString[0] = 0;	/* null string to indicate no zone or server name */
 	result = NewAliasMinimalFromFullPath(path.length(), path.c_str(), nullString, nullString, &alias);
 
-	if (result != noErr)
+	if (result != noErr) 
 		throw CL::BasicException ("Unable to resolve path!\n");
-		
+#if USE_HFS_PLUS	
+	result = FSResolveAlias(NULL, alias, &mFileRef, &wasChanged);	
+#else
 	result = ResolveAlias(NULL, alias, &mSpec, &wasChanged);
+#endif
 	DisposeHandle ((Handle)alias);
+	
+	if (result != noErr) 
+		throw CL::BasicException ("Unable to resolve path!\n");	
 }
 NativeMacFileInput::~NativeMacFileInput ()
 {
@@ -56,7 +67,16 @@ MacForkInputStream *NativeMacFileInput::openDF ()
 {
 	OSErr theErr;
 	short theRefNum;
+#if USE_HFS_PLUS
+	HFSUniStr255 forkName;
+	theErr = FSGetDataForkName(&forkName);
+	if (theErr != noErr)
+		throw CL::BasicException ("Cannot get datafork name!\n");
+		
+	theErr = FSOpenFork (&mFileRef, forkName.length, forkName.unicode, fsRdPerm, &theRefNum);
+#else
 	theErr = FSpOpenDF (&mSpec,fsRdPerm,&theRefNum);
+#endif
 	if (theErr != noErr)
 		throw CL::BasicException ("Cannot get open data fork!\n");
 	return new NativeMacForkInputStream (theRefNum);
@@ -65,7 +85,16 @@ MacForkInputStream *NativeMacFileInput::openRF ()
 {
 	OSErr theErr;
 	short theRefNum;
+#if USE_HFS_PLUS
+	HFSUniStr255 forkName;
+	theErr = FSGetResourceForkName(&forkName);
+	if (theErr != noErr)
+		throw CL::BasicException ("Cannot get datafork name!\n");
+		
+	theErr = FSOpenFork (&mFileRef, forkName.length, forkName.unicode, fsRdPerm, &theRefNum);
+#else
 	theErr = FSpOpenRF (&mSpec,fsRdPerm,&theRefNum);
+#endif
 	if (theErr != noErr)
 		throw CL::BasicException ("Cannot get resource fork!\n");
 	return new NativeMacForkInputStream (theRefNum);

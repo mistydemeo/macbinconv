@@ -20,8 +20,11 @@ virtual bool getInfo (	FInfo&		finderInfo,
 						FXInfo&		extendedInfo ) ;
 
 virtual bool getComment ( std::string&	thecomment );
-	 
+
+virtual std::string getFileName () { return mFileName; }
 private:
+	string 	mFileName;
+	
 	string	mDFFile;
 	string	mRFFile;
 };

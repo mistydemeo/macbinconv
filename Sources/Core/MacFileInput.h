@@ -41,6 +41,10 @@ virtual MacForkInputStream *openRF () = 0;
 virtual bool getInfo (	FInfo&		finderInfo,
 						FXInfo&		extendedInfo ) = 0;
 /**
+ * @returns the filename encoded in the current codepage/script.
+ */
+virtual std::string getFileName () = 0; 
+/**
  * @param string
  * @returns true if the info is available, false otherwise.
  */

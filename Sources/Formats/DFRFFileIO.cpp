@@ -8,6 +8,8 @@
 #include "Core/WriteFork.h"
 #include "Core/DefaultFInfo.h"
 
+#include "Core/FileUtils.h"
+
 using namespace std;
 
 class StdInputStream : public MacForkInputStream  {
@@ -44,7 +46,17 @@ DFRFFileInput::DFRFFileInput(
 					const string&	dfPath, 
 					const string&	rfPath)
 					: mDFFile (dfPath), mRFFile (rfPath)
-{}
+{
+	std::string dfname;
+	std::string rfname;
+	dfname = FileUtils::GetFileNameFromPath(dfPath);
+	rfname = FileUtils::GetFileNameFromPath(rfPath);
+	if (dfname.empty()) {
+		mFileName = rfname;
+	} else {
+		mFileName = dfname;
+	} 
+}
 DFRFFileInput::~DFRFFileInput()
 {}
 bool DFRFFileInput::getComment ( std::string&	thecomment )

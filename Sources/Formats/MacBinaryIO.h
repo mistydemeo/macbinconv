@@ -23,6 +23,8 @@ virtual bool getInfo (	FInfo&		finderInfo,
 						FXInfo&		extendedInfo ) ;
 
 virtual bool getComment ( std::string&	thecomment );
+
+virtual std::string getFileName () { return mFileName; }
 	 
 private:
 	UInt32			mDataSize;	// 0 if not available
@@ -30,6 +32,8 @@ private:
 	
 	UInt32			mResSize;	// 0 if not available
 	UInt32			mResOffset;	
+	
+	std::string		mFileName;
 
 	bool			mHasComment; 
 	std::string		mComment;
