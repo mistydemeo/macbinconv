@@ -115,6 +115,10 @@ SOURCE=..\..\Sources\Formats\MacBinaryIO.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\..\Sources\Formats\MacOSXIO.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\..\Sources\Formats\ServicesForMacIO.cpp
 # End Source File
 # End Group
@@ -128,6 +132,10 @@ SOURCE=..\..\Sources\Formats\AppleSingle.h
 # Begin Source File
 
 SOURCE=..\..\Sources\Formats\AppleSingleIO.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\Sources\Formats\MacBinaryIO.h
 # End Source File
 # Begin Source File
 

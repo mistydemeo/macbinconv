@@ -130,6 +130,9 @@
 				RelativePath="..\..\Sources\Formats\AppleSingleIO.cpp">
 			</File>
 			<File
+				RelativePath="..\..\Sources\Formats\MacOSXIO.cpp">
+			</File>
+			<File
 				RelativePath="..\..\Sources\Core\CommandLine.cpp">
 			</File>
 			<File
@@ -165,6 +168,9 @@
 			</File>
 			<File
 				RelativePath="..\..\Sources\Formats\AppleSingleIO.h">
+			</File>
+			<File
+				RelativePath="..\..\Sources\Formats\MacOSXIO.h">
 			</File>
 			<File
 				RelativePath="..\..\Sources\Core\CommandLine.h">

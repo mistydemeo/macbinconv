@@ -5,6 +5,7 @@
 #include "MacOSXIO.h"
 #include "AppleSingleIO.h"
 #include "Core/FileUtils.h"
+#include "CommandLine.h"
 
 namespace {
 
@@ -58,7 +59,7 @@ void  MacOSX::Write (MacFileInput& theInput, const char* path)
 
 namespace {
 
-static MacFileInput *createAD (int argc,const char** argv, int &processed)
+static MacFileInput *createOSX (int argc,const char** argv, int &processed)
 {
 	if (argc <= 2)
 		throw CL::FormatException("MacOSX input: expected one fileName\n");
@@ -66,7 +67,7 @@ static MacFileInput *createAD (int argc,const char** argv, int &processed)
 	processed=2;
 	return new MacOSX::Input(argv[1]);
 }
-static void processAD (MacFileInput *input, int argc,const char **argv, int &processed)
+static void processOSX (MacFileInput *input, int argc,const char **argv, int &processed)
 {
 	processed = 2;
 	if (argc != 2)

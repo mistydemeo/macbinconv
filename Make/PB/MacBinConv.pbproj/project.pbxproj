@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 34;
+	objectVersion = 38;
 	objects = {
 		014CEA460018CE2711CA2923 = {
 			buildRules = (
@@ -36,14 +36,12 @@
 //024
 		0249A660FF388D4511CA2CEA = {
 			isa = PBXExecutableFileReference;
-			name = ../../../Bin/macbinconv;
-			path = /Users/boga/Bin/macbinconv;
-			refType = 0;
+			path = macbinconv;
+			refType = 3;
 		};
 		0249A662FF388D9811CA2CEA = {
 			children = (
 				0249A663FF388D9811CA2CEA,
-				F5A6053601FA07A801A800EA,
 				F5A6052801FA007601A800EA,
 			);
 			isa = PBXGroup;
@@ -95,8 +93,9 @@
 				F5A6051D01F9FD2401A800EA,
 			);
 			isa = PBXGroup;
-			name = Source;
-			refType = 4;
+			name = Sources;
+			path = /Users/mfazekas/macbinconv/Sources;
+			refType = 0;
 		};
 		08FB779FFE84155DC02AAC07 = {
 			buildPhases = (
@@ -108,12 +107,12 @@
 			buildSettings = {
 				BUILD_SETTING = "";
 				FRAMEWORK_SEARCH_PATHS = "";
-				HEADER_SEARCH_PATHS = "/Users/boga/MacBinConv/macbinconv/Sources /usr/local/include/stlport";
+				HEADER_SEARCH_PATHS = ../../Sources;
 				INSTALL_PATH = "$(HOME)/bin";
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = /usr/lib/gcc/darwin/3.1;
 				OTHER_CFLAGS = "-DUSE_UMBRELLA_HEADERS=1 -DUSE_HFS_PLUS=1";
 				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ../../../Bin/macbinconv;
+				PRODUCT_NAME = macbinconv;
 				REZ_EXECUTABLE = YES;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
@@ -137,9 +136,11 @@
 				F5C7DF6801FAC54001A800EA,
 				F5C7DF6901FAC54001A800EA,
 				F5C7DF6D01FAC71701A800EA,
+				F7A68763037D902A01A800B7,
+				F7A68766037D909401A800B7,
 			);
 			isa = PBXHeadersBuildPhase;
-			name = Headers;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		08FB77A1FE84155DC02AAC07 = {
 			buildActionMask = 2147483647;
@@ -154,25 +155,26 @@
 				F5A6053101FA06D001A800EA,
 				F5A6053301FA06FC01A800EA,
 				F5C7DF6B01FAC6BA01A800EA,
+				F7A68764037D902A01A800B7,
 			);
 			isa = PBXSourcesBuildPhase;
-			name = Sources;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		08FB77A3FE84155DC02AAC07 = {
 			buildActionMask = 2147483647;
 			files = (
 				F5A6052901FA007601A800EA,
-				F5A6053701FA07A801A800EA,
+				F7A68760037D89B901A800B7,
 			);
 			isa = PBXFrameworksBuildPhase;
-			name = "Frameworks & Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		08FB77A5FE84155DC02AAC07 = {
 			buildActionMask = 2147483647;
 			files = (
 			);
 			isa = PBXRezBuildPhase;
-			name = "ResourceManager Resources";
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 //080
 //081
@@ -215,28 +217,30 @@
 				F5A6053201FA06FC01A800EA,
 			);
 			isa = PBXGroup;
-			name = Core;
+			path = Core;
 			refType = 4;
 		};
 		F5A6051D01F9FD2401A800EA = {
 			children = (
 				F5A6051E01F9FD5F01A800EA,
+				F7A68765037D909401A800B7,
 				F5A6052001F9FF2801A800EA,
 				F5A6052101F9FF2801A800EA,
 				F5A6052201F9FF2801A800EA,
 				F5A6052301F9FF2801A800EA,
 				F5C7DF6A01FAC6BA01A800EA,
 				F5C7DF6C01FAC71701A800EA,
+				F7A68761037D902A01A800B7,
+				F7A68762037D902A01A800B7,
 			);
 			isa = PBXGroup;
-			name = Formats;
+			path = Formats;
 			refType = 4;
 		};
 		F5A6051E01F9FD5F01A800EA = {
 			isa = PBXFileReference;
-			name = AppleSingleIO.cpp;
-			path = ../../Sources/Formats/AppleSingleIO.cpp;
-			refType = 2;
+			path = AppleSingleIO.cpp;
+			refType = 4;
 		};
 		F5A6051F01F9FD5F01A800EA = {
 			fileRef = F5A6051E01F9FD5F01A800EA;
@@ -246,30 +250,26 @@
 		};
 		F5A6052001F9FF2801A800EA = {
 			isa = PBXFileReference;
-			name = DFRFFileIO.cpp;
-			path = ../../Sources/Formats/DFRFFileIO.cpp;
-			refType = 2;
+			path = DFRFFileIO.cpp;
+			refType = 4;
 		};
 		F5A6052101F9FF2801A800EA = {
 			isa = PBXFileReference;
-			name = InfoOut.cpp;
-			path = ../../Sources/Formats/InfoOut.cpp;
-			refType = 2;
+			path = InfoOut.cpp;
+			refType = 4;
 		};
 		F5A6052201F9FF2801A800EA = {
 			indentWidth = 4;
 			isa = PBXFileReference;
-			name = MacBinaryIO.cpp;
-			path = ../../Sources/Formats/MacBinaryIO.cpp;
-			refType = 2;
+			path = MacBinaryIO.cpp;
+			refType = 4;
 			tabWidth = 4;
 			usesTabs = 0;
 		};
 		F5A6052301F9FF2801A800EA = {
 			isa = PBXFileReference;
-			name = NativeMacIO.cpp;
-			path = ../../Sources/Formats/NativeMacIO.cpp;
-			refType = 2;
+			path = NativeMacIO.cpp;
+			refType = 4;
 		};
 		F5A6052401F9FF2801A800EA = {
 			fileRef = F5A6052001F9FF2801A800EA;
@@ -324,20 +324,18 @@
 				F5A6052B01FA064101A800EA,
 			);
 			isa = PBXGroup;
-			name = FrontEnds;
+			path = FrontEnds;
 			refType = 4;
 		};
 		F5A6052E01FA06D001A800EA = {
 			isa = PBXFileReference;
-			name = DefaultFInfo.cpp;
-			path = ../../Sources/Core/DefaultFInfo.cpp;
-			refType = 2;
+			path = DefaultFInfo.cpp;
+			refType = 4;
 		};
 		F5A6052F01FA06D001A800EA = {
 			isa = PBXFileReference;
-			name = FileUtils.cpp;
-			path = ../../Sources/Core/FileUtils.cpp;
-			refType = 2;
+			path = FileUtils.cpp;
+			refType = 4;
 		};
 		F5A6053001FA06D001A800EA = {
 			fileRef = F5A6052E01FA06D001A800EA;
@@ -353,9 +351,8 @@
 		};
 		F5A6053201FA06FC01A800EA = {
 			isa = PBXFileReference;
-			name = CommandLine.cpp;
-			path = ../../Sources/Core/CommandLine.cpp;
-			refType = 2;
+			path = CommandLine.cpp;
+			refType = 4;
 		};
 		F5A6053301FA06FC01A800EA = {
 			fileRef = F5A6053201FA06FC01A800EA;
@@ -363,53 +360,36 @@
 			settings = {
 			};
 		};
-		F5A6053601FA07A801A800EA = {
-			isa = PBXFileReference;
-			name = libstlport_gcc.a;
-			path = /usr/local/lib/libstlport_gcc.a;
-			refType = 0;
-		};
-		F5A6053701FA07A801A800EA = {
-			fileRef = F5A6053601FA07A801A800EA;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		F5C7DF5E01FAC54001A800EA = {
 			isa = PBXFileReference;
 			name = DefaultFInfo.h;
-			path = /Users/boga/MacBinConv/macbinconv/Sources/Core/DefaultFInfo.h;
-			refType = 0;
+			path = ../../Sources/Core/DefaultFInfo.h;
+			refType = 4;
 		};
 		F5C7DF5F01FAC54001A800EA = {
 			isa = PBXFileReference;
-			name = FileUtils.h;
-			path = /Users/boga/MacBinConv/macbinconv/Sources/Core/FileUtils.h;
-			refType = 0;
+			path = FileUtils.h;
+			refType = 4;
 		};
 		F5C7DF6001FAC54001A800EA = {
 			isa = PBXFileReference;
-			name = MacEmu.h;
-			path = /Users/boga/MacBinConv/macbinconv/Sources/Core/MacEmu.h;
-			refType = 0;
+			path = MacEmu.h;
+			refType = 4;
 		};
 		F5C7DF6101FAC54001A800EA = {
 			isa = PBXFileReference;
-			name = MacFileInput.h;
-			path = /Users/boga/MacBinConv/macbinconv/Sources/Core/MacFileInput.h;
-			refType = 0;
+			path = MacFileInput.h;
+			refType = 4;
 		};
 		F5C7DF6201FAC54001A800EA = {
 			isa = PBXFileReference;
-			name = MacHeaders.h;
-			path = /Users/boga/MacBinConv/macbinconv/Sources/Core/MacHeaders.h;
-			refType = 0;
+			path = MacHeaders.h;
+			refType = 4;
 		};
 		F5C7DF6301FAC54001A800EA = {
 			isa = PBXFileReference;
-			name = WriteFork.h;
-			path = /Users/boga/MacBinConv/macbinconv/Sources/Core/WriteFork.h;
-			refType = 0;
+			path = WriteFork.h;
+			refType = 4;
 		};
 		F5C7DF6401FAC54001A800EA = {
 			fileRef = F5C7DF5E01FAC54001A800EA;
@@ -449,9 +429,8 @@
 		};
 		F5C7DF6A01FAC6BA01A800EA = {
 			isa = PBXFileReference;
-			name = md5.c;
-			path = ../../Sources/Formats/md5.c;
-			refType = 2;
+			path = md5.c;
+			refType = 4;
 		};
 		F5C7DF6B01FAC6BA01A800EA = {
 			fileRef = F5C7DF6A01FAC6BA01A800EA;
@@ -461,12 +440,60 @@
 		};
 		F5C7DF6C01FAC71701A800EA = {
 			isa = PBXFileReference;
-			name = md5.h;
-			path = ../../Sources/Formats/md5.h;
-			refType = 2;
+			path = md5.h;
+			refType = 4;
 		};
 		F5C7DF6D01FAC71701A800EA = {
 			fileRef = F5C7DF6C01FAC71701A800EA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+//F50
+//F51
+//F52
+//F53
+//F54
+//F70
+//F71
+//F72
+//F73
+//F74
+		F7A68760037D89B901A800B7 = {
+			fileRef = 0249A663FF388D9811CA2CEA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		F7A68761037D902A01A800B7 = {
+			isa = PBXFileReference;
+			path = MacOSXIO.h;
+			refType = 4;
+		};
+		F7A68762037D902A01A800B7 = {
+			isa = PBXFileReference;
+			path = MacOSXIO.cpp;
+			refType = 4;
+		};
+		F7A68763037D902A01A800B7 = {
+			fileRef = F7A68761037D902A01A800B7;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		F7A68764037D902A01A800B7 = {
+			fileRef = F7A68762037D902A01A800B7;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		F7A68765037D909401A800B7 = {
+			isa = PBXFileReference;
+			path = AppleSingleIO.h;
+			refType = 4;
+		};
+		F7A68766037D909401A800B7 = {
+			fileRef = F7A68765037D909401A800B7;
 			isa = PBXBuildFile;
 			settings = {
 			};
