@@ -2,7 +2,7 @@
 
 #include "Core/CommandLine.h"
 #include "Core/FileUtils.h"
-
+#include "Core/WriteFork.h"
 #include "Core/DefaultFInfo.h"
 
 #if defined(USE_UMBRELLA_HEADERS) && USE_UMBRELLA_HEADERS
@@ -22,8 +22,10 @@ public:
         
         ~AutoCFType () { if (mP != NULL) CFRelease (mP); }
     
+    
     AutoCFType<T>& operator= (AutoCFType<T>& r) { reset( r.release ()); return *this; }
     T&		operator= (const T& p) { reset (p); return mP;  }
+    operator	T& () { return mP; }
     T 		get () { return mP; }
     T		release () { T result = mP; mP = NULL; return result; }
     void 	reset (const T& p) { if ((p != mP) && (mP != NULL)) CFRelease (mP); mP = const_cast<T>(p);   }
@@ -171,20 +173,180 @@ bool  NativeMacFileInput::getComment ( std::string&	thecomment )
 {
 	return false;
 }
+
+/*
+    OSErr FSCreateFileUnicode (
+    const FSRef *parentRef, 
+    UniCharCount nameLength, 
+    const UniChar *name, 
+    FSCatalogInfoBitmap whichInfo, 
+    const FSCatalogInfo *catalogInfo, 
+    FSRef newRef, 
+    FSSpec newSpec
+);
+*/
+#if TARGET_API_MAC_CARBON
+class UniCharBuffer {
+public:
+                UniCharBuffer (const CFStringRef	&inString) : mData (NULL) {
+                    mLength = CFStringGetLength (inString); 
+                    mData = reinterpret_cast<UniChar*>(malloc (mLength*sizeof (UniChar*)));
+                    CFStringGetCharacters (inString, CFRangeMake (0, mLength), mData);
+                }
+                ~UniCharBuffer () {
+                    if (mData != NULL) {
+                        free (mData);
+                    }
+                }
+    operator 	UniChar* () { return mData; }	
+    int		length () { return mLength; }
+private:
+    int 	mLength;
+    UniChar*	mData;
+};
+#endif
+
+static void EncodeNativeMacFile (MacFileInput *input, const std::string& path) 
+{
+#if TARGET_API_MAC_CARBON && USE_HFS_PLUS
+    
+    std::string parentpath ();
+#if TARGET_RT_MAC_MACHO
+    CFURLPathStyle	pathstyle = kCFURLPOSIXPathStyle;
+    int loc = path.find_last_of("/\\", path.size ());
+    if (loc != 0)
+        loc++;
+#else
+    CFURLPathStyle 	pathstyle = kCFURLHFSPathStyle;
+
+    int loc = path.find_last_of(':',path.size());
+    if (loc != 0)
+            loc++;
+
+#endif
+
+    std::string	parent (path.substr(0, loc)); 
+                
+    AutoCFType<CFStringRef>	pathstr (NULL);
+    AutoCFType<CFURLRef>	url (NULL);
+    
+    pathstr = CFStringCreateWithCString (
+                kCFAllocatorDefault,
+                parent.c_str (),
+                CFStringGetSystemEncoding ());
+    if (pathstr.get () == NULL)
+        throw std::bad_alloc ();
+            
+    url = CFURLCreateWithFileSystemPath (
+                kCFAllocatorDefault,
+                pathstr.get (),
+                pathstyle,
+                false
+            );
+    if (url.get () == NULL)
+        throw std::bad_alloc ();
+        
+    FSRef	parentRef = {0};
+    if (!CFURLGetFSRef (url.get (), &parentRef)) 
+        throw CL::BasicException ("No parent directory exists!\n");
+    
+    AutoCFType<CFStringRef>	filename (NULL);
+   
+    filename = CFStringCreateWithCString (kCFAllocatorDefault, path.substr (loc, path.length()-loc).c_str(),  CFStringGetSystemEncoding());
+    if (filename.get () == NULL)
+         throw std::bad_alloc ();
+
+    UniCharBuffer		name (filename);
+    FSCatalogInfo		catalogInfo = {0} ;
+ 
+    input->getInfo (*reinterpret_cast<FInfo*>(catalogInfo.finderInfo), *reinterpret_cast<FXInfo*>(catalogInfo.extFinderInfo));
+    
+    FSRef theFile = {0};
+    OSErr status = FSCreateFileUnicode (&parentRef, name.length (), name, kFSCatInfoFinderInfo | kFSCatInfoFinderXInfo, &catalogInfo, &theFile, NULL);
+    if (status != noErr)
+        throw CL::BasicException ("Unable to create output file\n");
+
+    // Read DF size
+    std::auto_ptr<MacForkInputStream> df (input->openDF());
+    int dataForkLen = (df.get()  ? df->getSize() : 0);
+    
+    // Read RF size
+    std::auto_ptr<MacForkInputStream> rf (input->openRF());
+    int resourceForkLen = (rf.get() ? rf->getSize() : 0);
+
+    // HFS+ fork name
+    HFSUniStr255 forkName;
+        
+    if (resourceForkLen > 0) {
+        // Write Resource Fork:
+        OSErr theErr = FSGetResourceForkName(&forkName);
+        if (theErr != noErr)
+                throw CL::BasicException ("Cannot get datafork name!\n");
+                    
+        SInt16 refNum = 0;
+        status = FSOpenFork (&theFile, forkName.length, forkName.unicode, fsWrPerm, &refNum);
+        if (status != noErr)
+            throw CL::BasicException ("Unable to open output file for writing\n");
+            
+        try {
+            MacOSFileRefOStream ostream (refNum);
+            writeFork (*rf, ostream);
+            
+            FSClose ( refNum);
+        } 
+        catch (...) {
+            FSClose ( refNum);
+        }
+    }
+    
+    if (dataForkLen > 0) {
+        // Write Resource Fork:
+        OSErr theErr = FSGetDataForkName(&forkName);
+        if (theErr != noErr)
+                throw CL::BasicException ("Cannot get datafork name!\n");
+                    
+        SInt16 refNum = 0;
+        status = FSOpenFork (&theFile, forkName.length, forkName.unicode, fsWrPerm, &refNum);
+        if (status != noErr)
+            throw CL::BasicException ("Unable to open output file for writing\n");
+            
+        try {
+            MacOSFileRefOStream ostream (refNum);
+            writeFork (*df, ostream);
+            
+            FSClose ( refNum);
+        } 
+        catch (...) {
+            FSClose ( refNum);
+        }
+        
+    }
+#else
+    
+#endif
+}
+
 // Register to command line:
 namespace {
 static MacFileInput *create (int argc,const char** argv, int &processed)
 {
-	if (argc == 1)
-		throw CL::FormatException("MacBinary input: expected filename\n");	
+    processed=2;
+    if (argc == 1)
+            throw CL::FormatException("MacBinary input: expected filename\n");	
 
-	processed=2;
-	return new NativeMacFileInput(argv[1]);	
+    return new NativeMacFileInput(argv[1]);	
 }
 
+static void process (MacFileInput *input, int argc,const char **argv, int &processed)
+{
+    processed = 2;
+    if (argc < 2)
+            throw CL::FormatException ("-mac output requires only one filename\n");
+    EncodeNativeMacFile (input, argv[1]);
+}
 }
 void RegisterNativeMacIO ()
 {
-  CL::RegisterMacFileInput ("mac","-mac <filename> : where filename is a MacOS native file!",create);
-
+  CL::RegisterMacFileInput ("mac","-mac <filename> : where filename is a MacOS native file.",create);
+  CL::RegisterMacFileOutput ("mac","-mac <filename> : where filename is a MacOS native file.",process);
 }
