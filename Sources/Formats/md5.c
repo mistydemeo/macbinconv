@@ -39,6 +39,7 @@
  */
 
 #include "md5.h"
+#include <memory.h>
 
 #ifdef TEST
 /*

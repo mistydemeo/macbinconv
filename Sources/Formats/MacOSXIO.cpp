@@ -5,7 +5,7 @@
 #include "MacOSXIO.h"
 #include "AppleSingleIO.h"
 #include "Core/FileUtils.h"
-#include "CommandLine.h"
+#include "Core/CommandLine.h"
 
 namespace {
 
