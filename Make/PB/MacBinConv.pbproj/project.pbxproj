@@ -36,8 +36,9 @@
 //024
 		0249A660FF388D4511CA2CEA = {
 			isa = PBXExecutableFileReference;
-			path = MacBinConv;
-			refType = 3;
+			name = ../../../Bin/macbinconv;
+			path = /Users/boga/Bin/macbinconv;
+			refType = 0;
 		};
 		0249A662FF388D9811CA2CEA = {
 			children = (
@@ -112,7 +113,7 @@
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_CFLAGS = "-DUSE_UMBRELLA_HEADERS=1 -DUSE_HFS_PLUS=1";
 				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = MacBinConv;
+				PRODUCT_NAME = ../../../Bin/macbinconv;
 				REZ_EXECUTABLE = YES;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
@@ -129,6 +130,13 @@
 		08FB77A0FE84155DC02AAC07 = {
 			buildActionMask = 2147483647;
 			files = (
+				F5C7DF6401FAC54001A800EA,
+				F5C7DF6501FAC54001A800EA,
+				F5C7DF6601FAC54001A800EA,
+				F5C7DF6701FAC54001A800EA,
+				F5C7DF6801FAC54001A800EA,
+				F5C7DF6901FAC54001A800EA,
+				F5C7DF6D01FAC71701A800EA,
 			);
 			isa = PBXHeadersBuildPhase;
 			name = Headers;
@@ -145,6 +153,7 @@
 				F5A6053001FA06D001A800EA,
 				F5A6053101FA06D001A800EA,
 				F5A6053301FA06FC01A800EA,
+				F5C7DF6B01FAC6BA01A800EA,
 			);
 			isa = PBXSourcesBuildPhase;
 			name = Sources;
@@ -195,6 +204,12 @@
 //F54
 		F5A6051C01F9FD2401A800EA = {
 			children = (
+				F5C7DF5E01FAC54001A800EA,
+				F5C7DF5F01FAC54001A800EA,
+				F5C7DF6001FAC54001A800EA,
+				F5C7DF6101FAC54001A800EA,
+				F5C7DF6201FAC54001A800EA,
+				F5C7DF6301FAC54001A800EA,
 				F5A6052E01FA06D001A800EA,
 				F5A6052F01FA06D001A800EA,
 				F5A6053201FA06FC01A800EA,
@@ -210,6 +225,8 @@
 				F5A6052101F9FF2801A800EA,
 				F5A6052201F9FF2801A800EA,
 				F5A6052301F9FF2801A800EA,
+				F5C7DF6A01FAC6BA01A800EA,
+				F5C7DF6C01FAC71701A800EA,
 			);
 			isa = PBXGroup;
 			name = Formats;
@@ -240,10 +257,13 @@
 			refType = 2;
 		};
 		F5A6052201F9FF2801A800EA = {
+			indentWidth = 4;
 			isa = PBXFileReference;
 			name = MacBinaryIO.cpp;
 			path = ../../Sources/Formats/MacBinaryIO.cpp;
 			refType = 2;
+			tabWidth = 4;
+			usesTabs = 0;
 		};
 		F5A6052301F9FF2801A800EA = {
 			isa = PBXFileReference;
@@ -351,6 +371,102 @@
 		};
 		F5A6053701FA07A801A800EA = {
 			fileRef = F5A6053601FA07A801A800EA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		F5C7DF5E01FAC54001A800EA = {
+			isa = PBXFileReference;
+			name = DefaultFInfo.h;
+			path = /Users/boga/MacBinConv/macbinconv/Sources/Core/DefaultFInfo.h;
+			refType = 0;
+		};
+		F5C7DF5F01FAC54001A800EA = {
+			isa = PBXFileReference;
+			name = FileUtils.h;
+			path = /Users/boga/MacBinConv/macbinconv/Sources/Core/FileUtils.h;
+			refType = 0;
+		};
+		F5C7DF6001FAC54001A800EA = {
+			isa = PBXFileReference;
+			name = MacEmu.h;
+			path = /Users/boga/MacBinConv/macbinconv/Sources/Core/MacEmu.h;
+			refType = 0;
+		};
+		F5C7DF6101FAC54001A800EA = {
+			isa = PBXFileReference;
+			name = MacFileInput.h;
+			path = /Users/boga/MacBinConv/macbinconv/Sources/Core/MacFileInput.h;
+			refType = 0;
+		};
+		F5C7DF6201FAC54001A800EA = {
+			isa = PBXFileReference;
+			name = MacHeaders.h;
+			path = /Users/boga/MacBinConv/macbinconv/Sources/Core/MacHeaders.h;
+			refType = 0;
+		};
+		F5C7DF6301FAC54001A800EA = {
+			isa = PBXFileReference;
+			name = WriteFork.h;
+			path = /Users/boga/MacBinConv/macbinconv/Sources/Core/WriteFork.h;
+			refType = 0;
+		};
+		F5C7DF6401FAC54001A800EA = {
+			fileRef = F5C7DF5E01FAC54001A800EA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		F5C7DF6501FAC54001A800EA = {
+			fileRef = F5C7DF5F01FAC54001A800EA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		F5C7DF6601FAC54001A800EA = {
+			fileRef = F5C7DF6001FAC54001A800EA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		F5C7DF6701FAC54001A800EA = {
+			fileRef = F5C7DF6101FAC54001A800EA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		F5C7DF6801FAC54001A800EA = {
+			fileRef = F5C7DF6201FAC54001A800EA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		F5C7DF6901FAC54001A800EA = {
+			fileRef = F5C7DF6301FAC54001A800EA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		F5C7DF6A01FAC6BA01A800EA = {
+			isa = PBXFileReference;
+			name = md5.c;
+			path = ../../Sources/Formats/md5.c;
+			refType = 2;
+		};
+		F5C7DF6B01FAC6BA01A800EA = {
+			fileRef = F5C7DF6A01FAC6BA01A800EA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		F5C7DF6C01FAC71701A800EA = {
+			isa = PBXFileReference;
+			name = md5.h;
+			path = ../../Sources/Formats/md5.h;
+			refType = 2;
+		};
+		F5C7DF6D01FAC71701A800EA = {
+			fileRef = F5C7DF6C01FAC71701A800EA;
 			isa = PBXBuildFile;
 			settings = {
 			};
