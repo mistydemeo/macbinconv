@@ -81,5 +81,5 @@ static void processOSX (MacFileInput *input, int argc,const char **argv, int &pr
 void MacOSX::RegisterForCommandLine ()
 {
   CL::RegisterMacFileInput ("osx","-osx <filename> : where filename is a MacOSX encoded file for non HFS volumes",createOSX);
-  CL::RegisterMacFileOutput ("osx","-osx <filename> : where filename is a MacOSX encoded file for non HFS volumes",procesOSX);	
+  CL::RegisterMacFileOutput ("osx","-osx <filename> : where filename is a MacOSX encoded file for non HFS volumes",processOSX);	
 }
