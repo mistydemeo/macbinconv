@@ -56,7 +56,8 @@ class StdInputStream : public MacForkInputStream  {
 public:
 	StdInputStream (istream& input) : 
 	  mStream (input)
-	  {}
+	{
+	}
 	virtual ~StdInputStream ()
 	{ }
 
@@ -65,17 +66,20 @@ public:
 		long oldpos = mStream.tellg ();
 		mStream.seekg (0,ios::end);
 		long endpos = mStream.tellg ();
-		mStream.seekg (oldpos);
-
+		mStream.seekg (oldpos, ios::beg);
+		
 		return endpos;
 	}
 	virtual bool read (void *buffer, UInt32 &size)
 	{
-		mStream.read (reinterpret_cast<char*>(buffer),size);
-		if (mStream.eof())
-			return false;
-		else
+		if (mStream.read (reinterpret_cast<char*>(buffer),size)) 
 			return true;
+		else
+		#if defined (__APPLE__)
+			return true;
+		#else
+			return false;
+		#endif
 	}
 private:
 	istream&		mStream;

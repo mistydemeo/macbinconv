@@ -94,8 +94,8 @@
 			);
 			isa = PBXGroup;
 			name = Sources;
-			path = /Users/mfazekas/macbinconv/Sources;
-			refType = 0;
+			path = ../../Sources;
+			refType = 2;
 		};
 		08FB779FFE84155DC02AAC07 = {
 			buildPhases = (

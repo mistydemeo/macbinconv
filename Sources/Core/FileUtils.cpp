@@ -7,22 +7,22 @@ void FileUtils::SplitFilePath (const std::string &path, std::string *dir, std::s
 #if defined(macintosh) 
     #if TARGET_RT_MAC_MACHO
         loc = path.find_last_of("\\/",path.size ());
-        if (loc != 0)
+        if (loc != std::string::npos)
             loc++;
     #else
-	loc = path.find_last_of(':',path.size());
-	if (loc != 0)
-		loc++;
+		loc = path.find_last_of(':',path.size());
+		if (loc != std::string::npos)
+			loc++;
     #endif
 #else
 	loc = path.find_last_of("\\/",path.size());
-	if (loc != 0)
+	if (loc != std::string::npos)
 		loc++;
 #endif	
 	if (fname != 0) 
 		*fname = path.substr (loc);
 	if (dir != 0) 
-		*dir = path.substr (0, loc-1);
+		*dir = path.substr (0, loc);
 }
 
 std::string FileUtils::GetFileNameFromPath (const std::string &path)
@@ -32,16 +32,16 @@ std::string FileUtils::GetFileNameFromPath (const std::string &path)
 #if defined(macintosh) 
     #if TARGET_RT_MAC_MACHO
         loc = path.find_last_of("\\/",path.size ());
-        if (loc != 0)
+        if (loc != std::string::npos)
             loc++;
     #else
 	loc = path.find_last_of(':',path.size());
-	if (loc != 0)
+	if (loc != std::string::npos)
 		loc++;
     #endif
 #else
 	loc = path.find_last_of("\\/",path.size());
-	if (loc != 0)
+	if (loc != std::string::npos)
 		loc++;
 #endif	
 	return (path.substr(loc));

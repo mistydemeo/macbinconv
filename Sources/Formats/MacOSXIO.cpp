@@ -14,7 +14,8 @@ std::string GetMacOSXDFPath (const std::string &ipath)
 	std::string dir, fname;
 	FileUtils::SplitFilePath (ipath, &dir, &fname);
 	
-	return dir+"._"+fname;
+	std::string result = dir+"._"+fname;
+	return result;
 }
 
 }

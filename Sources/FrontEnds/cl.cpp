@@ -5,10 +5,11 @@
 #if defined (macintosh) || defined (__APPLE__)
 #include "Formats/NativeMacIO.h"		// Native Mac I/O with FOpen, etc.
 #endif
-#include "Formats/AppleSingleIO.h"		// AppleSingle I/O
-#include "Formats/DFRFFileIO.h"		// Data Fork/Resource Fork I/O
+#include "Formats/AppleSingleIO.h"		// AppleSingle and AppleDouble I/O
+#include "Formats/DFRFFileIO.h"			// Data Fork/Resource Fork I/O
 #include "Formats/MacBinaryIO.h"		// MacBinary File I/O
-#include "Formats/InfoOUT.h"		// FileInfo output
+#include "Formats/InfoOUT.h"			// FileInfo output
+#include "Formats/MacOSXIO.h"			// MacOS-X I/O
 
 #include "Core/CommandLine.h"			// Command line helper class.
 
@@ -24,9 +25,11 @@ int main(int argc, const char* argv[])
 #endif
 
 	RegisterAppleSingleIO ();
+	RegisterAppleDoubleIO ();
 	RegisterMacBinaryIO ();
 	RegisterDFRFFileIO ();
 	RegisterInfoOut ();
+	MacOSX::RegisterForCommandLine ();
 	
 	CL::DoExecute (argc,argv);
 
