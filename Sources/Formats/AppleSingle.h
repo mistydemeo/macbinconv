@@ -1,11 +1,7 @@
 #ifndef APPLESINGLE_H
 #define APPLESINGLE_H
 
-#ifdef macintosh
-#include <MacTypes.h>
-#else
-#include "Core/MacEmu.h"
-#endif
+#include "Core/MacHeaders.h"
 
 #if PRAGMA_STRUCT_ALIGN
 #pragma options align=mac68k

@@ -8,14 +8,15 @@ using namespace std;
 
 #include "Core/MacFileInput.h"
 
-class ASFileInput : public MacFileInput	// Services For Macitnosh
+namespace AppleSingle {
+class Input : public MacFileInput	// Services For Macitnosh
 {
 public:
-		ASFileInput (const std::string &path);
+		Input (const std::string &path);
 virtual	MacForkInputStream*	openDF () ;
 virtual	MacForkInputStream*	openRF () ;
 
-virtual ~ASFileInput ();
+virtual ~Input ();
 
 virtual bool getInfo (	FInfo&		finderInfo,
 						FXInfo&		extendedInfo ) ;
@@ -39,14 +40,20 @@ private:
 	ifstream		mStream;
 };
 
-class ADFileInput : public MacFileInput	// Services For Macitnosh
+extern void Write (MacFileInput& theInput, std::ostream &output);
+
+}
+
+namespace AppleDouble {
+class Input : public MacFileInput	// Services For Macitnosh
 {
 public:
-		ADFileInput (const std::string &pathforrf, const std::string &pathfordf);
+		Input (const std::string &pathforrf, const std::string &pathfordf);
+
 virtual	MacForkInputStream*	openDF () ;
 virtual	MacForkInputStream*	openRF () ;
 
-virtual ~ADFileInput ();
+virtual ~Input ();
 
 virtual bool getInfo (	FInfo&		finderInfo,
 						FXInfo&		extendedInfo ) ;
@@ -70,6 +77,12 @@ private:
 	ifstream		mDFStream;
 	ifstream		mRFStream;
 };
+
+extern void Write (MacFileInput& theInput, std::ostream &doutput, std::ostream &routput);
+
+}
+
+
 
 extern void RegisterAppleSingleIO ();
 extern void RegisterAppleDoubleIO ();

@@ -47,6 +47,8 @@
  * A.5 of RFC 1321, reproduced below.
  */
 #include <string.h>
+#include <memory.h>
+
 main()
 {
     static const char *const test[7] = {

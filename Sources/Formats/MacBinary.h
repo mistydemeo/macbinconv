@@ -1,11 +1,7 @@
 #ifndef MACBINARY_H
 #define MACBINARY_H
 
-#ifdef macintosh
-#include <MacTypes.h>
-#else
-#include "Core/MacEmu.h"
-#endif
+#include "Core/MacHeaders.h"
 
 enum MacHeaderVersion
 	{

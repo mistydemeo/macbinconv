@@ -6,6 +6,7 @@
 namespace FileUtils {
 
 extern std::string GetFileNameFromPath(const std::string &path);
+extern void		   SplitFilePath (const std::string &path, std::string *dir, std::string *fname);
 
 }
 

@@ -1,10 +1,6 @@
 #include "AppleSingleIO.h"
 
-#ifdef macintosh
-#include <Endian.h>
-#else
-#include "Core/MacEmu.h"
-#endif
+#include "Core/MacHeaders.h"
 
 #include <fstream>
 #include <memory>
@@ -85,7 +81,7 @@ private:
 	istream&		mStream;
 };
 
-ADFileInput::ADFileInput (const std::string	&datapath, const std::string	&resource)
+AppleDouble::Input::Input (const std::string	&datapath, const std::string	&resource)
 : mDFStream(datapath.c_str(), ios::in | ios::binary), 
   mRFStream(resource.c_str(), ios::in | ios::binary)
 {
@@ -145,7 +141,7 @@ ADFileInput::ADFileInput (const std::string	&datapath, const std::string	&resour
 	mFileName = FileUtils::GetFileNameFromPath(datapath);
 }
 
-ASFileInput::ASFileInput (const std::string	&path)
+AppleSingle::Input::Input (const std::string	&path)
 : mStream(path.c_str(), ios::in | ios::binary)
 {
 	mDataSize	= 0;
@@ -202,17 +198,17 @@ ASFileInput::ASFileInput (const std::string	&path)
 	mFileName = FileUtils::GetFileNameFromPath(path);
 }
 
-ASFileInput::~ASFileInput()
+AppleSingle::Input::~Input()
 {
 }
 
-ADFileInput::~ADFileInput()
+AppleDouble::Input::~Input()
 {
 }
 
 
 MacForkInputStream*	 
-ASFileInput::openDF ()
+AppleSingle::Input::openDF ()
 {
 	if (mDataSize == 0)
 		return NULL;
@@ -221,13 +217,13 @@ ASFileInput::openDF ()
 }
 
 MacForkInputStream*	 
-ADFileInput::openDF ()
+AppleDouble::Input::openDF ()
 {
 	return new StdInputStream(mDFStream);
 }
 
 MacForkInputStream*
-ASFileInput::openRF ()
+AppleSingle::Input::openRF ()
 {
 	if (mResSize == 0)
 		return NULL;
@@ -236,7 +232,7 @@ ASFileInput::openRF ()
 }
 
 MacForkInputStream*
-ADFileInput::openRF ()
+AppleDouble::Input::openRF ()
 {
 	if (mResSize == 0)
 		return NULL;
@@ -244,7 +240,7 @@ ADFileInput::openRF ()
 		return new SubIStream(mRFStream,mResOffset,mResSize);
 }
 
-bool ASFileInput::getInfo (	
+bool AppleSingle::Input::getInfo (	
 				FInfo&		finderInfo,
 				FXInfo&		extendedInfo ) 
 {
@@ -264,7 +260,7 @@ bool ASFileInput::getInfo (
 	return true;
 }
 
-bool ADFileInput::getInfo (	
+bool AppleDouble::Input::getInfo (	
 				FInfo&		finderInfo,
 				FXInfo&		extendedInfo ) 
 {
@@ -284,28 +280,29 @@ bool ADFileInput::getInfo (
 	return true;
 }
 
-std::string ASFileInput::getFileName()
+std::string AppleSingle::Input::getFileName()
 {
 	// ToDo if this info present in AS return that value!!!
 	return mFileName;
 }
-std::string ADFileInput::getFileName()
+std::string AppleDouble::Input::getFileName()
 {
 	// ToDo if this info present in AS return that value!!!
 	return mFileName;
 }
 
-bool ASFileInput::getComment ( std::string&	thecomment )
+bool AppleSingle::Input::getComment ( std::string&	thecomment )
 {
 	return false;
 }
-bool ADFileInput::getComment ( std::string&	thecomment )
+bool AppleDouble::Input::getComment ( std::string&	thecomment )
 {
 	return false;
 }
 
+namespace {
 
-static void writeAppleSingleEntry(ostream &output, const AppleSingleEntry& entry)
+void writeAppleSingleEntry(ostream &output, const AppleSingleEntry& entry)
 {
 	AppleSingleEntry	entryBig;
 
@@ -315,9 +312,9 @@ static void writeAppleSingleEntry(ostream &output, const AppleSingleEntry& entry
 
 	output.write ((char*)&entryBig, sizeof(entryBig));
 }
+}
 
-
-static void EncodeAS (MacFileInput &theInput, std::ostream &output)
+void AppleSingle::Write (MacFileInput &theInput, std::ostream &output)
 {
 	AppleSingleHeader	encodeFileHeader = {0} ;
 	AppleSingleEntry	dataForkEntry = {0} ;
@@ -412,7 +409,7 @@ static void EncodeAS (MacFileInput &theInput, std::ostream &output)
 	output.write ((char*)&extendedInfo,sizeof(extendedInfo));
 }
 
-static void EncodeAD (MacFileInput &theInput, std::ostream &doutput, std::ostream &routput)
+void AppleDouble::Write (MacFileInput &theInput, std::ostream &doutput, std::ostream &routput)
 {
 	AppleSingleHeader	encodeFileHeader = {0} ;
 	AppleSingleEntry	dataForkEntry = {0} ;
@@ -515,7 +512,7 @@ static MacFileInput *createAS (int argc,const char** argv, int &processed)
 		throw CL::FormatException("AppleSingle input: expected fileName\n");
 	
 	processed=2;
-	return new ASFileInput(argv[1]);
+	return new AppleSingle::Input(argv[1]);
 }
 static void processAS (MacFileInput *input, int argc,const char **argv, int &processed)
 {
@@ -525,15 +522,15 @@ static void processAS (MacFileInput *input, int argc,const char **argv, int &pro
 	
 	std::ofstream	outputStream (argv[1],ios::out | ios::binary);
 		
-	EncodeAS (*input,outputStream);
+	AppleSingle::Write (*input,outputStream);
 }
 static MacFileInput *createAD (int argc,const char** argv, int &processed)
 {
-	if (argc == 2)
+	if (argc < 3)
 		throw CL::FormatException("AppleDouble input: expected two fileName\n");
 	
 	processed=3;
-	return new ADFileInput(argv[1], argv[2]);
+	return new AppleDouble::Input(argv[1], argv[2]);
 }
 static void processAD (MacFileInput *input, int argc,const char **argv, int &processed)
 {
@@ -544,7 +541,7 @@ static void processAD (MacFileInput *input, int argc,const char **argv, int &pro
 	std::ofstream	outputStream_DF (argv[1],ios::out | ios::binary);
 	std::ofstream	outputStream_RF (argv[1],ios::out | ios::binary);
 		
-	EncodeAD (*input, outputStream_DF, outputStream_RF);
+	AppleDouble::Write (*input, outputStream_DF, outputStream_RF);
 }
 
 }
@@ -556,6 +553,6 @@ void RegisterAppleSingleIO()
 
 void RegisterAppleDoubleIO() 
 {
-  CL::RegisterMacFileInput ("ad","-ad <filename> <macdata> : where filename is an AppleSingle encoded file",createAD);
-  CL::RegisterMacFileOutput ("ad","-ad <filename> : file will be encoded to filename AppleSingle file",processAD);
+  CL::RegisterMacFileInput ("ad","-ad <filename> <macdata> : where filename is datafork, macdata is an AppleDouble encoded file",createAD);
+  CL::RegisterMacFileOutput ("ad","-ad <filename> <macdata> : file will be encoded to filename AppleDouble file",processAD);
 }

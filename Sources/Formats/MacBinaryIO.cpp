@@ -1,10 +1,6 @@
 #include "MacBinaryIO.h"
 
-#ifdef macintosh
-#include <Endian.h>
-#else
-#include "Core/MacEmu.h"
-#endif
+#include "Core/MacHeaders.h"
 
 #include <fstream>
 #include <memory>
