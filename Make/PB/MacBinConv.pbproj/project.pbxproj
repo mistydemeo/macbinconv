@@ -3,14 +3,19 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 38;
+	objectVersion = 39;
 	objects = {
 		014CEA460018CE2711CA2923 = {
 			buildRules = (
 			);
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				OPTIMIZATION_CFLAGS = "-O0";
+				ZERO_LINK = YES;
 			};
 			isa = PBXBuildStyle;
 			name = Development;
@@ -20,6 +25,8 @@
 			);
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				ZERO_LINK = NO;
 			};
 			isa = PBXBuildStyle;
 			name = Deployment;
@@ -35,9 +42,12 @@
 //023
 //024
 		0249A660FF388D4511CA2CEA = {
+			explicitFileType = "compiled.mach-o.executable";
+			fallbackIsa = PBXFileReference;
 			isa = PBXExecutableFileReference;
 			path = macbinconv;
 			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		0249A662FF388D9811CA2CEA = {
 			children = (
@@ -47,12 +57,15 @@
 			isa = PBXGroup;
 			name = "External Frameworks and Libraries";
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		0249A663FF388D9811CA2CEA = {
 			isa = PBXFileReference;
+			lastKnownFileType = archive.ar;
 			name = "libstdc++.a";
 			path = "/usr/lib/libstdc++.a";
 			refType = 0;
+			sourceTree = "<absolute>";
 		};
 //020
 //021
@@ -65,10 +78,15 @@
 //083
 //084
 		08FB7793FE84155DC02AAC07 = {
+			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.1;
+				SDKROOT = /Developer/SDKs/MacOSX10.1.5.sdk;
+			};
 			buildStyles = (
 				014CEA460018CE2711CA2923,
 				014CEA470018CE2711CA2923,
 			);
+			hasScannedForEncodings = 1;
 			isa = PBXProject;
 			mainGroup = 08FB7794FE84155DC02AAC07;
 			projectDirPath = "";
@@ -85,6 +103,7 @@
 			isa = PBXGroup;
 			name = MacBinConv;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		08FB7795FE84155DC02AAC07 = {
 			children = (
@@ -96,6 +115,7 @@
 			name = Sources;
 			path = ../../Sources;
 			refType = 2;
+			sourceTree = SOURCE_ROOT;
 		};
 		08FB779FFE84155DC02AAC07 = {
 			buildPhases = (
@@ -107,6 +127,7 @@
 			buildSettings = {
 				BUILD_SETTING = "";
 				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_VERSION = 3.1;
 				HEADER_SEARCH_PATHS = ../../Sources;
 				INSTALL_PATH = "$(HOME)/bin";
 				LIBRARY_SEARCH_PATHS = /usr/lib/gcc/darwin/3.1;
@@ -124,7 +145,6 @@
 			productInstallPath = "$(HOME)/bin";
 			productName = MacBinConv;
 			productReference = 0249A660FF388D4511CA2CEA;
-			shouldUseHeadermap = 1;
 		};
 		08FB77A0FE84155DC02AAC07 = {
 			buildActionMask = 2147483647;
@@ -138,6 +158,7 @@
 				F5C7DF6D01FAC71701A800EA,
 				F7A68763037D902A01A800B7,
 				F7A68766037D909401A800B7,
+				E49749CF0668C7150097B49A,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -193,12 +214,37 @@
 			isa = PBXGroup;
 			name = Products;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 //1A0
 //1A1
 //1A2
 //1A3
 //1A4
+//E40
+//E41
+//E42
+//E43
+//E44
+		E49749CE0668C7150097B49A = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = CommandLine.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		E49749CF0668C7150097B49A = {
+			fileRef = E49749CE0668C7150097B49A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+//E40
+//E41
+//E42
+//E43
+//E44
 //F50
 //F51
 //F52
@@ -206,6 +252,7 @@
 //F54
 		F5A6051C01F9FD2401A800EA = {
 			children = (
+				E49749CE0668C7150097B49A,
 				F5C7DF5E01FAC54001A800EA,
 				F5C7DF5F01FAC54001A800EA,
 				F5C7DF6001FAC54001A800EA,
@@ -219,6 +266,7 @@
 			isa = PBXGroup;
 			path = Core;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F5A6051D01F9FD2401A800EA = {
 			children = (
@@ -236,11 +284,15 @@
 			isa = PBXGroup;
 			path = Formats;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F5A6051E01F9FD5F01A800EA = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
 			path = AppleSingleIO.cpp;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F5A6051F01F9FD5F01A800EA = {
 			fileRef = F5A6051E01F9FD5F01A800EA;
@@ -249,27 +301,39 @@
 			};
 		};
 		F5A6052001F9FF2801A800EA = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
 			path = DFRFFileIO.cpp;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F5A6052101F9FF2801A800EA = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
 			path = InfoOut.cpp;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F5A6052201F9FF2801A800EA = {
+			fileEncoding = 30;
 			indentWidth = 4;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
 			path = MacBinaryIO.cpp;
 			refType = 4;
+			sourceTree = "<group>";
 			tabWidth = 4;
 			usesTabs = 0;
 		};
 		F5A6052301F9FF2801A800EA = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
 			path = NativeMacIO.cpp;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F5A6052401F9FF2801A800EA = {
 			fileRef = F5A6052001F9FF2801A800EA;
@@ -296,10 +360,13 @@
 			};
 		};
 		F5A6052801FA007601A800EA = {
+			fallbackIsa = PBXFileReference;
 			isa = PBXFrameworkReference;
+			lastKnownFileType = wrapper.framework;
 			name = CoreServices.framework;
 			path = /System/Library/Frameworks/CoreServices.framework;
 			refType = 0;
+			sourceTree = "<absolute>";
 		};
 		F5A6052901FA007601A800EA = {
 			fileRef = F5A6052801FA007601A800EA;
@@ -308,10 +375,13 @@
 			};
 		};
 		F5A6052B01FA064101A800EA = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
 			name = cl.cpp;
 			path = ../../Sources/FrontEnds/cl.cpp;
 			refType = 2;
+			sourceTree = SOURCE_ROOT;
 		};
 		F5A6052C01FA064101A800EA = {
 			fileRef = F5A6052B01FA064101A800EA;
@@ -326,16 +396,23 @@
 			isa = PBXGroup;
 			path = FrontEnds;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F5A6052E01FA06D001A800EA = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
 			path = DefaultFInfo.cpp;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F5A6052F01FA06D001A800EA = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
 			path = FileUtils.cpp;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F5A6053001FA06D001A800EA = {
 			fileRef = F5A6052E01FA06D001A800EA;
@@ -350,9 +427,12 @@
 			};
 		};
 		F5A6053201FA06FC01A800EA = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
 			path = CommandLine.cpp;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F5A6053301FA06FC01A800EA = {
 			fileRef = F5A6053201FA06FC01A800EA;
@@ -361,35 +441,53 @@
 			};
 		};
 		F5C7DF5E01FAC54001A800EA = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			name = DefaultFInfo.h;
 			path = ../../Sources/Core/DefaultFInfo.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F5C7DF5F01FAC54001A800EA = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			path = FileUtils.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F5C7DF6001FAC54001A800EA = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			path = MacEmu.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F5C7DF6101FAC54001A800EA = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			path = MacFileInput.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F5C7DF6201FAC54001A800EA = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			path = MacHeaders.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F5C7DF6301FAC54001A800EA = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			path = WriteFork.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F5C7DF6401FAC54001A800EA = {
 			fileRef = F5C7DF5E01FAC54001A800EA;
@@ -428,9 +526,12 @@
 			};
 		};
 		F5C7DF6A01FAC6BA01A800EA = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.c;
 			path = md5.c;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F5C7DF6B01FAC6BA01A800EA = {
 			fileRef = F5C7DF6A01FAC6BA01A800EA;
@@ -439,9 +540,12 @@
 			};
 		};
 		F5C7DF6C01FAC71701A800EA = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			path = md5.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F5C7DF6D01FAC71701A800EA = {
 			fileRef = F5C7DF6C01FAC71701A800EA;
@@ -466,14 +570,20 @@
 			};
 		};
 		F7A68761037D902A01A800B7 = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			path = MacOSXIO.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F7A68762037D902A01A800B7 = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
 			path = MacOSXIO.cpp;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F7A68763037D902A01A800B7 = {
 			fileRef = F7A68761037D902A01A800B7;
@@ -488,9 +598,12 @@
 			};
 		};
 		F7A68765037D909401A800B7 = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			path = AppleSingleIO.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		F7A68766037D909401A800B7 = {
 			fileRef = F7A68765037D909401A800B7;

@@ -37,7 +37,7 @@ CL::BasicException::BasicException (const char* message)
 	strncpy (mStr, message, sizeof (mStr));
 	mStr[sizeof(mStr)-1] = 0;
 }
-const char* CL::BasicException::what ()
+const char* CL::BasicException::what () const throw ()
 {
 	return mStr;
 }

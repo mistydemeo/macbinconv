@@ -67,7 +67,7 @@ void printFileInfo (MacFileInput &theInput, bool checkSum = true)
 		std::auto_ptr<MacForkInputStream> df (theInput.openDF());
 
 		size = (df.get()  ? df->getSize() : 0);
-		printf ("\t\t<size>%d</size>\n",size);
+		printf ("\t\t<size>%d</size>\n",int(size));
 		if (checkSum && df.get ())
 		{
                     md5_byte_t digest[16];
@@ -87,7 +87,7 @@ void printFileInfo (MacFileInput &theInput, bool checkSum = true)
                 printf ("\t<resourcefork>\n");
 		std::auto_ptr<MacForkInputStream> rf (theInput.openRF());
 		size = (rf.get() ? rf->getSize() : 0);
-		printf ("\t\t<size>%d</size>\n",size);
+		printf ("\t\t<size>%d</size>\n",int(size));
 		if (checkSum && rf.get ())
 		{
                     md5_byte_t digest[16];

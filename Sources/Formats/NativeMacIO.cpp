@@ -62,8 +62,10 @@ NativeMacFileInput::NativeMacFileInput (const std::string &path)
         if (url.get () == NULL)
             throw std::bad_alloc ();
         
-        if (!CFURLGetFSRef (url.get (), &mFileRef)) 
-            throw CL::BasicException ("File not found at path!\n");
+        if (!CFURLGetFSRef (url.get (), &mFileRef)) {
+            std::string error = std::string("No such file:\"") + path + std::string("\"");
+            throw CL::BasicException (error.c_str ());
+        }
         
 #else    
 	AliasHandle	alias;

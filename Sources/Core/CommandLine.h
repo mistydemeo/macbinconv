@@ -26,7 +26,7 @@ void ProcessOutputPart (MacFileInput *input,int argc, const char**argv,int &proc
 class BasicException : public std::exception {
 public:
 		BasicException (const char* message);
-		const char*	what ();
+		const char*	what () const throw ();
 private:
 		char	mStr[256];
 };

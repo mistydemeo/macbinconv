@@ -44,5 +44,8 @@ std::string FileUtils::GetFileNameFromPath (const std::string &path)
 	if (loc != std::string::npos)
 		loc++;
 #endif	
-	return (path.substr(loc));
+    if (loc != std::string::npos)
+      return (path.substr(loc));
+    else
+      return path;   	  
 }

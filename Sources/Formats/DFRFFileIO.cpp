@@ -88,10 +88,10 @@ void EncodeDFRF (MacFileInput &theInput, const char* dataFile, const char* resou
 {
 	// Read DF size
 	std::auto_ptr<MacForkInputStream> df (theInput.openDF());
-	UInt32 dataForkLen = (df.get()  ? df->getSize() : 0);
+	//UInt32 dataForkLen = (df.get()  ? df->getSize() : 0);
 	// Read RF size
 	std::auto_ptr<MacForkInputStream> rf (theInput.openRF());
-	UInt32 resourceForkLen = (rf.get() ? rf->getSize() : 0);
+	//UInt32 resourceForkLen = (rf.get() ? rf->getSize() : 0);
 	
 	// Write data fork
 	{
