@@ -5,6 +5,8 @@
 #include "Core/WriteFork.h"
 #include "Core/DefaultFInfo.h"
 
+#include <sstream>
+
 #if defined(USE_UMBRELLA_HEADERS) && USE_UMBRELLA_HEADERS
     #include <CoreServices/CoreServices.h>
 #else
@@ -211,23 +213,15 @@ private:
 static void EncodeNativeMacFile (MacFileInput *input, const std::string& path) 
 {
 #if TARGET_API_MAC_CARBON && USE_HFS_PLUS
-    
-    std::string parentpath ();
 #if TARGET_RT_MAC_MACHO
     CFURLPathStyle	pathstyle = kCFURLPOSIXPathStyle;
-    int loc = path.find_last_of("/\\", path.size ());
-    if (loc != 0)
-        loc++;
 #else
     CFURLPathStyle 	pathstyle = kCFURLHFSPathStyle;
-
-    int loc = path.find_last_of(':',path.size());
-    if (loc != 0)
-            loc++;
-
 #endif
-
-    std::string	parent (path.substr(0, loc)); 
+    
+    std::string	parent;
+    std::string fname;
+    FileUtils::SplitFilePath (path, &parent, &fname);
                 
     AutoCFType<CFStringRef>	pathstr (NULL);
     AutoCFType<CFURLRef>	url (NULL);
@@ -254,7 +248,7 @@ static void EncodeNativeMacFile (MacFileInput *input, const std::string& path)
     
     AutoCFType<CFStringRef>	filename (NULL);
    
-    filename = CFStringCreateWithCString (kCFAllocatorDefault, path.substr (loc, path.length()-loc).c_str(),  CFStringGetSystemEncoding());
+    filename = CFStringCreateWithCString (kCFAllocatorDefault, fname.c_str(),  CFStringGetSystemEncoding());
     if (filename.get () == NULL)
          throw std::bad_alloc ();
 
@@ -265,9 +259,17 @@ static void EncodeNativeMacFile (MacFileInput *input, const std::string& path)
     
     FSRef theFile = {0};
     OSErr status = FSCreateFileUnicode (&parentRef, name.length (), name, kFSCatInfoFinderInfo | kFSCatInfoFinderXInfo, &catalogInfo, &theFile, NULL);
-    if (status != noErr)
-        throw CL::BasicException ("Unable to create output file\n");
-
+    if (status != noErr) {
+        std::stringstream err;
+        err << std::string("Unable to create file:\"");
+        err << path;
+        err << std::string("\" (");
+        err << status;
+        err << std::string(")");
+        
+        throw CL::BasicException (err.str ().c_str ());
+    }
+    
     // Read DF size
     std::auto_ptr<MacForkInputStream> df (input->openDF());
     int dataForkLen = (df.get()  ? df->getSize() : 0);
@@ -344,7 +346,8 @@ static void process (MacFileInput *input, int argc,const char **argv, int &proce
     processed = 2;
     if (argc < 2)
             throw CL::FormatException ("-mac output requires only one filename\n");
-    EncodeNativeMacFile (input, argv[1]);
+    std::string path(argv[1]);
+    EncodeNativeMacFile (input, path);
 }
 }
 void RegisterNativeMacIO ()

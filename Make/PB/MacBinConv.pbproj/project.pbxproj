@@ -79,8 +79,6 @@
 //084
 		08FB7793FE84155DC02AAC07 = {
 			buildSettings = {
-				MACOSX_DEPLOYMENT_TARGET = 10.1;
-				SDKROOT = /Developer/SDKs/MacOSX10.1.5.sdk;
 			};
 			buildStyles = (
 				014CEA460018CE2711CA2923,
@@ -91,6 +89,7 @@
 			mainGroup = 08FB7794FE84155DC02AAC07;
 			projectDirPath = "";
 			targets = (
+				E4440F960669AEC6003A4247,
 				08FB779FFE84155DC02AAC07,
 			);
 		};
@@ -127,7 +126,6 @@
 			buildSettings = {
 				BUILD_SETTING = "";
 				FRAMEWORK_SEARCH_PATHS = "";
-				GCC_VERSION = 3.1;
 				HEADER_SEARCH_PATHS = ../../Sources;
 				INSTALL_PATH = "$(HOME)/bin";
 				LIBRARY_SEARCH_PATHS = /usr/lib/gcc/darwin/3.1;
@@ -141,7 +139,7 @@
 			dependencies = (
 			);
 			isa = PBXToolTarget;
-			name = MacBinConv;
+			name = "MacBinConv OLD";
 			productInstallPath = "$(HOME)/bin";
 			productName = MacBinConv;
 			productReference = 0249A660FF388D4511CA2CEA;
@@ -210,6 +208,7 @@
 		1AB674ADFE9D54B511CA2CBB = {
 			children = (
 				0249A660FF388D4511CA2CEA,
+				E4440FB30669AEC6003A4247,
 			);
 			isa = PBXGroup;
 			name = Products;
@@ -226,6 +225,235 @@
 //E42
 //E43
 //E44
+		E4440F960669AEC6003A4247 = {
+			buildPhases = (
+				E4440F970669AEC6003A4247,
+				E4440FA20669AEC6003A4247,
+				E4440FAE0669AEC6003A4247,
+				E4440FB10669AEC6003A4247,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				BUILD_SETTING = "";
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_PREPROCESSOR_DEFINITIONS = "USE_UMBRELLA_HEADERS=1 USE_HFS_PLUS=1";
+				HEADER_SEARCH_PATHS = ../../Sources;
+				INSTALL_PATH = "$(HOME)/bin";
+				LIBRARY_SEARCH_PATHS = /usr/lib/gcc/darwin/3.3;
+				OTHER_CFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = macbinconv;
+				REZ_EXECUTABLE = YES;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
+			};
+			dependencies = (
+			);
+			isa = PBXNativeTarget;
+			name = MacBinConv;
+			productInstallPath = "$(HOME)/bin";
+			productName = MacBinConv;
+			productReference = E4440FB30669AEC6003A4247;
+			productType = "com.apple.product-type.tool";
+		};
+		E4440F970669AEC6003A4247 = {
+			buildActionMask = 2147483647;
+			files = (
+				E4440F980669AEC6003A4247,
+				E4440F990669AEC6003A4247,
+				E4440F9A0669AEC6003A4247,
+				E4440F9B0669AEC6003A4247,
+				E4440F9C0669AEC6003A4247,
+				E4440F9D0669AEC6003A4247,
+				E4440F9E0669AEC6003A4247,
+				E4440F9F0669AEC6003A4247,
+				E4440FA00669AEC6003A4247,
+				E4440FA10669AEC6003A4247,
+			);
+			isa = PBXHeadersBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E4440F980669AEC6003A4247 = {
+			fileRef = F5C7DF5E01FAC54001A800EA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E4440F990669AEC6003A4247 = {
+			fileRef = F5C7DF5F01FAC54001A800EA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E4440F9A0669AEC6003A4247 = {
+			fileRef = F5C7DF6001FAC54001A800EA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E4440F9B0669AEC6003A4247 = {
+			fileRef = F5C7DF6101FAC54001A800EA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E4440F9C0669AEC6003A4247 = {
+			fileRef = F5C7DF6201FAC54001A800EA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E4440F9D0669AEC6003A4247 = {
+			fileRef = F5C7DF6301FAC54001A800EA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E4440F9E0669AEC6003A4247 = {
+			fileRef = F5C7DF6C01FAC71701A800EA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E4440F9F0669AEC6003A4247 = {
+			fileRef = F7A68761037D902A01A800B7;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E4440FA00669AEC6003A4247 = {
+			fileRef = F7A68765037D909401A800B7;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E4440FA10669AEC6003A4247 = {
+			fileRef = E49749CE0668C7150097B49A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E4440FA20669AEC6003A4247 = {
+			buildActionMask = 2147483647;
+			files = (
+				E4440FA30669AEC6003A4247,
+				E4440FA40669AEC6003A4247,
+				E4440FA50669AEC6003A4247,
+				E4440FA60669AEC6003A4247,
+				E4440FA70669AEC6003A4247,
+				E4440FA80669AEC6003A4247,
+				E4440FA90669AEC6003A4247,
+				E4440FAA0669AEC6003A4247,
+				E4440FAB0669AEC6003A4247,
+				E4440FAC0669AEC6003A4247,
+				E4440FAD0669AEC6003A4247,
+			);
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E4440FA30669AEC6003A4247 = {
+			fileRef = F5A6051E01F9FD5F01A800EA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E4440FA40669AEC6003A4247 = {
+			fileRef = F5A6052001F9FF2801A800EA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E4440FA50669AEC6003A4247 = {
+			fileRef = F5A6052101F9FF2801A800EA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E4440FA60669AEC6003A4247 = {
+			fileRef = F5A6052201F9FF2801A800EA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E4440FA70669AEC6003A4247 = {
+			fileRef = F5A6052301F9FF2801A800EA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E4440FA80669AEC6003A4247 = {
+			fileRef = F5A6052B01FA064101A800EA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E4440FA90669AEC6003A4247 = {
+			fileRef = F5A6052E01FA06D001A800EA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E4440FAA0669AEC6003A4247 = {
+			fileRef = F5A6052F01FA06D001A800EA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E4440FAB0669AEC6003A4247 = {
+			fileRef = F5A6053201FA06FC01A800EA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E4440FAC0669AEC6003A4247 = {
+			fileRef = F5C7DF6A01FAC6BA01A800EA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E4440FAD0669AEC6003A4247 = {
+			fileRef = F7A68762037D902A01A800B7;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E4440FAE0669AEC6003A4247 = {
+			buildActionMask = 2147483647;
+			files = (
+				E4440FAF0669AEC6003A4247,
+				E4440FB00669AEC6003A4247,
+			);
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E4440FAF0669AEC6003A4247 = {
+			fileRef = F5A6052801FA007601A800EA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E4440FB00669AEC6003A4247 = {
+			fileRef = 0249A663FF388D9811CA2CEA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		E4440FB10669AEC6003A4247 = {
+			buildActionMask = 2147483647;
+			files = (
+			);
+			isa = PBXRezBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E4440FB30669AEC6003A4247 = {
+			explicitFileType = "compiled.mach-o.executable";
+			includeInIndex = 0;
+			isa = PBXFileReference;
+			path = macbinconv;
+			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		E49749CE0668C7150097B49A = {
 			fileEncoding = 30;
 			isa = PBXFileReference;

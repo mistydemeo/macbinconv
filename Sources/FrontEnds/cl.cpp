@@ -1,4 +1,4 @@
-// Supported Formats
+// Supported Formats  
 #if defined (WINDOWS)
 #include "Formats/ServicesForMacIO.h"	// Services For Macintosh i/o
 #endif
@@ -12,6 +12,7 @@
 #include "Formats/MacOSXIO.h"			// MacOS-X I/O
 
 #include "Core/CommandLine.h"			// Command line helper class.
+
 
 int main(int argc, const char* argv[])
 {

@@ -195,7 +195,7 @@ private:
 
 
 MacBinFileInput::MacBinFileInput (const std::string	&path)
-: mStream(path.c_str(), ios::in | ios::binary)
+    : mStream(path.c_str(), ios::in | ios::binary)
 {
 	mDataSize	= 0;
 	mResSize	= 0;
@@ -206,7 +206,8 @@ MacBinFileInput::MacBinFileInput (const std::string	&path)
 	char macBinHeader[128];
 	if (!mStream.good())
 	{
-		throw CL::BasicException ("Bad stream passed to mStream!\n");
+        std::string err = std::string("Cannot open:\"") + path + std::string("\" for reading");
+		throw CL::BasicException (err.c_str());
 	}
 
 	mStream.read(macBinHeader,128);
