@@ -8,7 +8,9 @@ using namespace std;
 
 #include "Core/MacFileInput.h"
 
-#define USE_HFS_PLUS	0
+#ifndef USE_HFS_PLUS
+    #define USE_HFS_PLUS	0
+#endif
 
 class NativeMacFileInput : public MacFileInput	// Native macos
 {

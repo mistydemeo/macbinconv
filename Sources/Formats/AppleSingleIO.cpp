@@ -14,7 +14,7 @@
 #include "Core/WriteFork.h"
 #include "Core/DefaultFInfo.h"
 
-#include "FileUtils.h"
+#include "Core/FileUtils.h"
 
 
 class SubIStream : public MacForkInputStream {
@@ -75,9 +75,8 @@ ASFileInput::ASFileInput (const std::string	&path)
 	{
 		throw CL::BasicException ("Cannot read the header\n");
 	}
-	UInt32	test = header.fMagicNumber;
-	UInt32  testn = EndianU32_BtoN(header.fMagicNumber);
-	if (EndianU32_BtoN(header.fMagicNumber) != kAppleSingleMagicNumber)
+	
+        if (EndianU32_BtoN(header.fMagicNumber) != kAppleSingleMagicNumber)
 		throw CL::BasicException ("Bad apple single header!\n");
 
 	if (EndianU32_BtoN(header.fVersion) != kAppleSingleVersion)
@@ -307,3 +306,4 @@ void RegisterAppleSingleIO()
   CL::RegisterMacFileOutput ("as","-as <filename> : file will be encoded to filename AppleSingle file",process);
 
 }
+

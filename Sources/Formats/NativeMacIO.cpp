@@ -3,11 +3,14 @@
 #include "Core/CommandLine.h"
 #include "Core/FileUtils.h"
 
-#include "DefaultFInfo.h"
+#include "Core/DefaultFInfo.h"
 
-#include <Files.h>
-#include <Aliases.h>
-
+#if defined(USE_UMBRELLA_HEADERS) && USE_UMBRELLA_HEADERS
+    #include <CoreServices/CoreServices.h>
+#else
+    #include <Files.h>
+    #include <Aliases.h>
+#endif
 
 
 NativeMacFileInput::NativeMacFileInput (const std::string &path)

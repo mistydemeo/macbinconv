@@ -2,7 +2,7 @@
 #if defined (WINDOWS)
 #include "Formats/ServicesForMacIO.h"	// Services For Macintosh i/o
 #endif
-#if defined (macintosh)
+#if defined (macintosh) || defined (__APPLE__)
 #include "Formats/NativeMacIO.h"		// Native Mac I/O with FOpen, etc.
 #endif
 #include "Formats/AppleSingleIO.h"		// AppleSingle I/O
@@ -19,7 +19,7 @@ int main(int argc, const char* argv[])
 	RegisterServicesForMacIO ();
 #endif
 
-#if defined(macintosh)
+#if defined(macintosh) || defined (__APPLE__)
 	RegisterNativeMacIO ();
 #endif
 
