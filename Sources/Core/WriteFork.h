@@ -31,8 +31,8 @@ private:
 };
 #endif
 
-#ifdef macintosh
-class MacOSFileRefOStream {
+#if defined(macintosh) || defined (__APPLE__)
+class MacOSFileRefOStream : public OStream {
 public:
 		MacOSFileRefOStream (SInt16 file) : mFile(file) {}
 virtual ~MacOSFileRefOStream () {}
@@ -43,7 +43,7 @@ virtual void write (const char *data, UInt32 bytes)
 	SInt32 dataWritten = bytes;
 	
 	theErr = FSWrite (mFile, &dataWritten, data); 
-	if ((dataWritten != bytes) || (theErr != noErr))
+	if ((dataWritten != (SInt32)bytes) || (theErr != noErr))
 		throw CL::BasicException ("Write failed\n");
 }
 

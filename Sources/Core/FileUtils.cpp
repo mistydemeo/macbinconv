@@ -5,7 +5,7 @@ std::string FileUtils::GetFileNameFromPath(const std::string &path)
 	int loc;
 
 #if defined(macintosh) 
-    #if TARGET_RT_MACH0
+    #if TARGET_RT_MAC_MACHO
         loc = path.find_last_of("\\/",path.size ());
         if (loc != 0)
             loc++;
